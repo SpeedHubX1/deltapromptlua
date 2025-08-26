@@ -1,0 +1,46 @@
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "DeltaSettingsPrompt"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 400, 0, 200)
+frame.Position = UDim2.new(0.5, -200, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 8)
+corner.Parent = frame
+
+local message = Instance.new("TextLabel")
+message.Size = UDim2.new(1, -20, 1, -60)
+message.Position = UDim2.new(0, 10, 0, 10)
+message.BackgroundTransparency = 1
+message.TextWrapped = true
+message.TextXAlignment = Enum.TextXAlignment.Left
+message.TextYAlignment = Enum.TextYAlignment.Top
+message.Font = Enum.Font.SourceSansBold
+message.TextSize = 18
+message.TextColor3 = Color3.fromRGB(255, 255, 255)
+message.Text = "Turn off all Delta settings:\n1. Disable Anti-AFK\n2. Disable Verify Teleport\n3. Disable Anti-Scam\n\nAfter disabling, press OK to continue."
+message.Parent = frame
+
+local okButton = Instance.new("TextButton")
+okButton.Size = UDim2.new(0, 100, 0, 40)
+okButton.Position = UDim2.new(0.5, -50, 1, -50)
+okButton.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+okButton.Font = Enum.Font.SourceSansBold
+okButton.TextSize = 20
+okButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+okButton.Text = "OK"
+okButton.Parent = frame
+
+local btnCorner = Instance.new("UICorner")
+btnCorner.CornerRadius = UDim.new(0, 6)
+btnCorner.Parent = okButton
+
+okButton.MouseButton1Click:Connect(function()
+	screenGui:Destroy()
+end)
